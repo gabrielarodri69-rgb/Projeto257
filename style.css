@@ -1,0 +1,329 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #2a0845, #6441a5);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 15px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 25px;
+    width: 100%;
+    max-width: 380px; /* Tamanho perfeito para telas de celular */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.title {
+    color: #39FF14; /* Verde fluorescente estilo o tema do seu terminal! */
+    text-shadow: 2px 2px #000;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.instruction, .tip {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.tip {
+    margin-top: 15px;
+    color: #666;
+    font-style: italic;
+}
+
+/* O Tabuleiro Ajustado para a Proporção da Imagem Original (Vertical) */
+#puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    width: 100%;
+    aspect-ratio: 1 / 2.2; /* Mantém a proporção vertical da foto */
+    background: #000;
+    border: 4px solid #39FF14;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.puzzle-piece {
+    background-image: url('1000286787.jpg'); /* Nome idêntico ao arquivo */
+    background-size: 300% 300%; /* Divide a imagem em grade 3x3 */
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.puzzle-piece.selected {
+    transform: scale(0.95);
+    border: 3px solid #ff007f; /* Rosa choque ao selecionar */
+    box-shadow: 0 0 10px #ff007f;
+}
+
+/* Telas da Carta */
+.hidden {
+    display: none !important;
+}
+
+/* Container Principal da Surpresa (Fundo Galáxia Cósmica) */
+#secret-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #0f0c20, #150030, #2c0054);
+    border: 4px solid #ff007f;
+    box-shadow: 0 0 35px rgba(255, 0, 127, 0.7);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px; /* Excelente largura para visualização em celulares modernos */
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* O Título de Vitória */
+#secret-container h2 {
+    color: #ff007f;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+    text-align: center;
+}
+
+/* A ÁREA DA CARTA (Estilo Selo / Papel de Carta Antigo Envelhecido) */
+.letter-content {
+    background-color: #fcf8f2; /* Tom de papel carta marfim agradável aos olhos */
+    background-image: radial-gradient(#e5dcd0 20%, transparent 20%),
+                      radial-gradient(#e5dcd0 20%, transparent 20%);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px; /* Textura sutil que imita papel trabalhado */
+    
+    color: #2b2b2b;
+    padding: 25px;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    
+    /* Efeito de Borda Ondulada / Serrilhada de Selo usando CSS masks */
+    filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.15));
+    
+    /* CONFIGURAÇÃO DO TEXTO E QUEBRAS DE LINHA RESPONSIVAS */
+    font-family: 'Courier New', Courier, monospace; /* Estilo máquina de escrever romântica */
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: left;
+    white-space: pre-line;      /* Preserva as quebras de linha que você digitar no JS */
+    word-break: break-word;     /* Se uma palavra for grande demais, ela quebra sem deformar a tela */
+    overflow-wrap: break-word;  /* Proteção extra para o layout mobile */
+    
+    max-height: 400px;          /* Limite confortável para não sumir com o botão */
+    overflow-y: auto;           /* Caso seu texto cresça muito no futuro, a rolagem fica interna e fluida */
+    margin-bottom: 25px;
+    box-sizing: border-box;
+}
+
+/* Deixa a barra de rolagem interna do papel sutil e elegante */
+.letter-content::-webkit-scrollbar {
+    width: 4px;
+}
+.letter-content::-webkit-scrollbar-thumb {
+    background: #ffb1d2;
+    border-radius: 4px;
+}
+
+/* Rodapé com Assinatura e Player Indicator */
+.letter-footer {
+    color: #ffb1d2;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: sans-serif;
+}
+
+.signature {
+    margin-top: 15px;
+    text-align: right;
+    font-weight: bold;
+    color: #6441a5;
+}
+
+.music-playing-indicator {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #666;
+    animation: blink 1s infinite alternate;
+}
+
+/* Camada de Corações Voadores */
+#hearts-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -20px;
+    color: #ff007f;
+    font-size: 24px;
+    opacity: 0.8;
+    animation: floatUp linear forwards;
+}
+
+/* Animações */
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes blink {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUp {
+    to {
+ .heart-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    height: 100px;
+}
+
+#btn-reset {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background-color: #ff007f;
+    border: none;
+    cursor: pointer;
+    transform: rotate(-45deg); 
+    animation: pulsarBotao 1.2s infinite alternate;
+    box-shadow: -5px 5px 15px rgba(255, 0, 127, 0.4);
+    transition: all 0.2s ease;
+}
+
+#btn-reset::before {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #ff007f;
+    border-radius: 50%;
+    top: -40px;
+    left: 0;
+}
+
+#btn-reset::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #ff007f;
+    border-radius: 50%;
+    left: 40px;
+    top: 0;
+}
+
+#btn-reset span {
+    position: absolute;
+    top: 25px;
+    left: -5px;
+    transform: rotate(45deg);
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    z-index: 10;
+    width: 90px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+@keyframes pulsarBotao {
+    0% {
+        transform: rotate(-45deg) scale(1);
+        box-shadow: -5px 5px 15px rgba(255, 0, 127, 0.4);
+    }
+    50% {
+        transform: rotate(-45deg) scale(1.1);
+        box-shadow: -5px 5px 25px rgba(255, 0, 127, 0.6);
+    }
+    100% {
+        transform: rotate(-45deg) scale(1);
+        box-shadow: -5px 5px 15px rgba(255, 0, 127, 0.4);
+    }
+}
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.puzzle-piece {
+    /* ... outras linhas que já estão lá ... */
+    background-size: 300% 300%; 
+    background-repeat: no-repeat; /* Evita que a imagem duplique nas bordinhas */
+}
+
+
+/* 1. Estilo do coração flutuante (Garante que ele comece no rodapé da tela) */
+.floating-heart {
+    position: fixed;
+    bottom: -50px; /* Começa um pouco abaixo da tela para surgir suavemente */
+    color: #ff007f; /* Rosa choque */
+    opacity: 0.8;
+    pointer-events: none; /* Evita que o clique do namorado pegue no coração sem querer */
+    z-index: 9999;
+    animation: voarParaCima linear forwards; /* Aplica a animação de subida */
+}
+
+/* 2. A animação que faz o coração subir e sumir */
+@keyframes voarParaCima {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    100% {
+        /* O 'var(--randomX)' faz ele subir meio tortinho para os lados, ficando mais natural */
+        transform: translateY(-110vh) translateX(var(--randomX, 50px));
+        opacity: 0; /* Fica invisível quando chega no topo */
+    }
+}
+
+/* Estilo dos Brilhos subindo */
+.floating-sparkle {
+    position: fixed;
+    bottom: -50px;
+    color: #ffd700; /* Dourado brilhante */
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: voarParaCima linear forwards;
+    text-shadow: 0 0 8px #ffd700;
+}

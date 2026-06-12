@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio do Amor 🧩</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<audio id="love-song" src="musica.mp3" preload="auto"></audio>
+    <!-- Container do Jogo (Quebra-Cabeça) -->
+    <div id="game-container" class="container">
+        <h1 class="title">Decifre o Enigma 🎸</h1>
+        <p class="instruction">Ordene as peças para reconstruir a imagem e desbloquear sua surpresa de amor!</p>
+        
+        <!-- O Tabuleiro do Quebra-Cabeça -->
+        <div id="puzzle-board"></div>
+        
+        <p class="tip">💡 Toque em uma peça e depois em outra para trocá-las de lugar!</p>
+    </div>
+
+    <!-- Container da Surpresa (Escondido inicialmente) -->
+<div id="secret-container" class="hidden">
+    <h2>Você Conseguio! ❤️</h2>
+    
+    <div class="letter-content" id="text-carta">
+        Meu amor,
+        Assim como as peças desse quebra-cabeça, a minha vida ganhou um sentido perfeito depois que encontrei você. A distância física entre nós dois, não é nada perto do tamanho do amor que sinto por você grandão.
+        Você me apoia, me inspira e torna cada dia mais colorido e incrível. Nunca vou esquecer de todo o trabalho que você teve comigo, e que mesmo assim não desistiu de mim. 
+        Obrigada por ser meu companheiro de aventuras, de músicas boas e de sonhos compartilhados, você é o meu porto seguro. Te amo daqui até o infinito! 🌌
+        </div>
+    
+    <div class="letter-footer">
+        <p>🎵 Tocando nossa música...</p>
+        <p style="margin-top: 5px; color: #ff007f; font-weight: bold;">Com todo o meu amor, Gabi ✨</p>
+    </div>
+
+    <div class="heart-btn-container">
+        <button id="btn-reset" onclick="resetarJogo()" aria-label="Jogar Novamente">
+            <span>De Novo?</span>
+        </button>
+    </div>
+</div>
+
+    <!-- Elemento para gerar os corações voadores -->
+    <div id="hearts-layer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
