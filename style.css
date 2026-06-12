@@ -107,7 +107,7 @@ body {
 
 /* A ÁREA DA CARTA (Estilo Selo / Papel de Carta Antigo Envelhecido) */
 .letter-content {
-    background-color: #fcf8f2; /* Tom de papel carta marfim agradável aos olhos */
+    background-color: #ffa7f0; /* Tom de papel carta marfim agradável aos olhos */
     background-image: radial-gradient(#e5dcd0 20%, transparent 20%),
                       radial-gradient(#e5dcd0 20%, transparent 20%);
     background-size: 16px 16px;
@@ -124,7 +124,8 @@ body {
     
     /* CONFIGURAÇÃO DO TEXTO E QUEBRAS DE LINHA RESPONSIVAS */
     font-family: 'Courier New', Courier, monospace; /* Estilo máquina de escrever romântica */
-    font-size: 15px;
+    font-size: 25px;
+    font-weight: bold; /* Texto em negrito */
     line-height: 1.6;
     text-align: left;
     white-space: pre-line;      /* Preserva as quebras de linha que você digitar no JS */
